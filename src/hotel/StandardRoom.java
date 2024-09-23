@@ -4,8 +4,8 @@ public class StandardRoom extends Room{
     // underklass
     private boolean hasTv;
 
-    public StandardRoom(String roomNr, int capacity, boolean hasTv) {
-        super(roomNr, capacity);
+    public StandardRoom(String roomNr, int capacity, boolean hasTv, double pricePerNight) {
+        super(roomNr, capacity, pricePerNight);
         // super kallar på basklassens (Room) konstruktor först
         this.hasTv = hasTv;
     }

@@ -1,18 +1,21 @@
 package hotel;
 
+import java.time.LocalDate;
+
 public class Room {
     // Room: basklassen, innehålla alla egenskaper och beetende som alla rum har gemensamt
     // StandardRoom och Suite: underklasser till Room + sina egna unika egenskaper
     // BookingService: hantera bokningar, tillgänglihet m.m.
 
     // markera man klassen abstract då kan man undvika att det går att skapa ett objekt av klassen.
-
+    private double pricePerNight;
     private String roomNr;
     private int capacity;
     private boolean isBooked;
 
     // konstruktorn
-    public Room(String roomNr, int capacity) {
+    public Room(String roomNr, int capacity, double pricePerNight) {
+        this.pricePerNight = pricePerNight;
         this.roomNr = roomNr;
         this.capacity = capacity;
         // standard värde
@@ -27,13 +30,20 @@ public class Room {
         return capacity;
     }
 
-
     public boolean isBooked() {
         return isBooked;
     }
 
     public void setBooked(boolean booked) {
         isBooked = booked;
+    }
+
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public void setPricePerNight(double pricePerNight) {
+        this.pricePerNight = pricePerNight;
     }
 
     // metod för att boka rum
@@ -56,20 +66,22 @@ public class Room {
         }
     }
 
-    // metod för att visa detaljer om rummet
-
-    /*@Override
-    public String toString() {
-        return "Room{" +
-                "roomNr='" + roomNr + '\'' +
-                ", capacity=" + capacity +
-                ", isBooked=" + isBooked +
-                '}';
-    }*/
-
     public void displayRoomDetails() {
         System.out.println("Room " + roomNr + " with capacity of " + capacity + " guests.");
     }
+
+    // räkna ut priset för antalet nätter
+    public double calculatePricePerNight(int nights) {
+        return pricePerNight * nights;
+    }
+
+    // kolla om ett rum är tillgängligt under ett datumintervall, den här används sedan i BookingService
+    public boolean isAvailable(LocalDate checkInDate, LocalDate checkOutDate, LocalDate existingCheckInDate, LocalDate existingCheckOutDate) {
+        return checkOutDate.isBefore(existingCheckInDate) || checkInDate.isAfter(checkOutDate);
+    }
+
+
+
 }
 
 

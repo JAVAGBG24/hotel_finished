@@ -1,4 +1,4 @@
-public class Main {
+public class App {
     public static void main(String[] args) {
         int score = calculateScore("Helena", 200);
         System.out.println(score);
